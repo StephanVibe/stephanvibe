@@ -3,11 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Website</title>
+    <title>Stephan Vibe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hallo, ich bin Stephan</h1>
-    <p>Willkommen auf meiner Website.</p>
+
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showPage('home')">Home</button>
+    <button class="nav-btn" onclick="showPage('about')">Über mich</button>
+    <button class="nav-btn" onclick="showPage('projects')">Projekte</button>
+    <button class="nav-btn" onclick="showPage('contact')">Kontakt</button>
+  </nav>
+
+  <main>
+    <section id="home" class="page active">
+      <h1>Hallo!</h1>
+      <p>Willkommen auf meiner Website.</p>
+    </section>
+
+    <section id="about" class="page">
+      <h1>Über mich</h1>
+      <p>In bearbeitung</p>
+    </section>
+
+    <section id="projects" class="page">
+      <h1>Projekte</h1>
+      <p>In bearbeitung</p>
+    </section>
+
+    <section id="contact" class="page">
+      <h1>Kontakt</h1>
+      <p>In bearbeitung</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
