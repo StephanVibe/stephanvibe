@@ -11,3 +11,7 @@ function showPage(id) {
   // Geklickten Button aktivieren
   event.target.classList.add('active');
 }
+
+function troll() {
+    document.getElementById('GorillaMittelFinger2').classList.toggle('versteckt');
+}

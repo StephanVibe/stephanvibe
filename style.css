@@ -26,3 +26,7 @@
 
 .page { display: none; }
 .page.active { display: block; }
+
+.versteckt{
+    display: none;
+}
