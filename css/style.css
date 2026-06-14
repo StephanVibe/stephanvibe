@@ -1,0 +1,44 @@
+.custom-button-style {
+    /* Macht das Element zu einer Box, die Breite und Höhe akzeptiert */
+    display: flex;
+
+    /* Deine Wunsch-Größe (erzwingen) */
+    width: 14rem;
+    height: 10rem;
+
+    /* Das ersetzt 'btn btn-outline-secondary' und den Rahmen */
+    border: 1px solid #6c757d;
+    background-color: transparent;
+
+    /* Text-Farbe und Unterstrich entfernen */
+    color: white;
+    text-decoration: none;
+
+    /* Schatten aus deinem ursprünglichen Style */
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+
+    /* Damit es beim Hovern weich einfadet */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 1rem;
+    /* Optional: abgerundete Ecken */
+}
+
+/* Die kleine Variante für normale Buttons */
+.custom-button-small {
+    width: 8rem;
+    height: 3rem;
+}
+
+/* Der Hover-Effekt, damit sich beim Drüberfahren auch was tut */
+.custom-button-style:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
