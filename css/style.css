@@ -42,3 +42,15 @@
     box-shadow: 0 6px 20px rgba(255, 255, 255, 0.7);
     text-decoration: none;
 }
+
+.btn-shadow-red {
+    /* Überschreibt den weißen Schatten mit einem roten RGBA-Schatten */
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.6) !important;
+}
+
+.btn-hover-red:hover {
+    background-color: rgba(255, 0, 0, 0.2) !important;
+    border-color: #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+}
