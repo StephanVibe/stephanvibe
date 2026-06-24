@@ -8,20 +8,30 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+
 </head>
 
 <body class="bg-black text-light">
 
     <main class="container mt-2">
 
-        <a class="custom-button-style btn-hover-red" href="index.html">
+
+        <a class="custom-button-style btn-hover-red mb-3" href="index.html">
             <span class="text-light">Zurück</span>
         </a>
 
-        <input type="email" class="form-control mt-5" id="email" placeholder="E-Mail-Adresse">
-        <textarea class="form-control mt-3" id="message" rows="5" placeholder="Nachricht"></textarea>
-        <a class="custom-button-style btn-hover-red mt-3" type="submit" href="gallery.html">
-            Absenden
-        </a>
+        <form action="https://formsubmit.co/stephanvibe@gmail.com" method="POST">
+
+            <input type="email" name="email" class="form-control mb-2" placeholder="E-Mail-Adresse" id="email" required>
+
+            <textarea name="message" class="form-control mb-3" id="message" rows="3" placeholder="Nachricht"
+                required></textarea>
+
+            <button type="submit" class="custom-button-style">Absenden</button>
+
+        </form>
+
     </main>
+
 </body>
