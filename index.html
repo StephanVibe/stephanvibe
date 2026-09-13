@@ -8,6 +8,24 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* CSS für den blinkenden Cursor */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: currentColor;
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
 </head>
 
 <body class="bg-black text-light">
@@ -45,22 +63,71 @@
     <main class="container pt-5" style="margin-top: 60px;">
 
         <h1 class="mb-5">
-            <span class="text-light fw-bold d-block">Hi, ich bin Stephan!</span>
-            <span class="text-white-50 fw-normal fs-4">Auszubildender Softwareentwickler</span>
+            <span id="tw-title" class="text-light fw-bold d-block"></span>
+            <span id="tw-subtitle" class="text-white-50 fw-normal fs-4"></span>
         </h1>
 
-        <h2 class="fs-3 fw-semibold fst-italic mb-3">Willkommen auf meiner persönlichen Webseite!</h2>
+        <h2 id="tw-welcome" class="fs-3 fw-semibold fst-italic mb-3"></h2>
 
         <div class="fs-5">
-            <p>Ich freue mich, dass du hier bist!</p>
-            <p class="mb-1">Schau dich gerne um und zögere nicht, mich zu kontaktieren,</p>
-            <p>wenn du Fragen hast oder einfach nur Hallo sagen möchtest.</p>
+            <p id="tw-p1"></p>
+            <p id="tw-p2" class="mb-1"></p>
+            <p id="tw-p3"></p>
         </div>
 
     </main>
 
     <script src="js/bootstrap.bundle.min.js"></script>
 
-</body>
+    <!-- Steuerungsskript für die Tipp-Reihenfolge -->
+    <script type="module">
+        import { createTypewriter } from './js/Typewriter.js';
 
+        // Alle Texte in der gewünschten Reihenfolge
+        const steps = [
+            { id: 'tw-title', text: 'Hi, ich bin Stephan!' },
+            { id: 'tw-subtitle', text: 'Auszubildender Softwareentwickler' },
+            { id: 'tw-welcome', text: 'Willkommen auf meiner persönlichen Webseite!' },
+            { id: 'tw-p1', text: 'Ich freue mich, dass du hier bist!' },
+            { id: 'tw-p2', text: 'Schau dich gerne um und zögere nicht, mich zu kontaktieren,' },
+            { id: 'tw-p3', text: 'wenn du Fragen hast oder einfach nur Hallo sagen möchtest.' }
+        ];
+
+        // Erstellt ein Cursor-Element
+        const cursor = document.createElement('span');
+        cursor.className = 'typewriter-cursor';
+
+        function runSequence(index = 0) {
+            // Wenn alle Texte getippt wurden, Cursor entfernen und beenden
+            if (index >= steps.length) {
+                cursor.remove();
+                return;
+            }
+
+            const current = steps[index];
+            const targetElement = document.getElementById(current.id);
+
+            if (!targetElement) return;
+
+            // Cursor an das aktuelle Element anhängen
+            targetElement.appendChild(cursor);
+
+            const tw = createTypewriter(targetElement, current.text, {
+                speed: 35, // Geschwindigkeit in ms (kleiner = schneller)
+                loop: false,
+                onComplete: () => {
+                    // Nach Abschluss des aktuellen Textes zum nächsten springen
+                    runSequence(index + 1);
+                }
+            });
+
+            tw.start();
+        }
+
+        // Starte die Animation
+        runSequence();
+    </script>
+
+</body>
 </html>
+
