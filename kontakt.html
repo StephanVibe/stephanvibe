@@ -286,6 +286,10 @@
             margin-inline: auto;
         }
 
+        .glass-input:invalid:not(:placeholder-shown) {
+    border-color: rgba(255, 110, 110, 0.7) !important;
+}
+
         @media (max-width: 575.98px) {
             .glass-nav { padding: 0.4rem 0.5rem 0.4rem 0.9rem; }
             .nav-brand { font-size: 1rem; gap: 0.45rem; }
@@ -320,8 +324,6 @@
 
         <div class="contact-wrap">
 
-            <a class="glass-button back mb-4" href="index.html">← Zurück</a>
-
             <h1 class="page-title mb-4 text-center">Kontakt</h1>
 
             <section class="glass-card form-card mb-5">
@@ -333,7 +335,9 @@
                 <form action="https://formsubmit.co/stephanvibe@gmail.com" method="POST">
 
                     <input type="email" name="email" class="form-control glass-input mb-3"
-                        placeholder="E-Mail-Adresse" id="email" required>
+    placeholder="E-Mail-Adresse" id="email" required
+    pattern="[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}"
+    title="Bitte eine gültige E-Mail-Adresse eingeben, z. B. name@beispiel.de">
 
                     <textarea name="message" class="form-control glass-input mb-4" id="message" rows="5"
                         placeholder="Nachricht" required></textarea>
@@ -359,6 +363,14 @@
                 card.style.setProperty('--my', `${e.clientY - rect.top}px`);
             });
         });
+
+        const email = document.getElementById('email');
+email.addEventListener('input', () => {
+    email.setCustomValidity('');   // zuerst zurücksetzen
+    if (!email.validity.valid) {
+        email.setCustomValidity('Bitte eine gültige E-Mail-Adresse eingeben.');
+    }
+});
     </script>
 
 </body>

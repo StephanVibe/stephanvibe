@@ -1,0 +1,15 @@
+/* ===== index.css – nur Startseite ===== */
+
+/* Verhindert, dass die Karten beim Tippen "springen" */
+.card-hero    { min-height: 170px; }
+.card-welcome { min-height: 260px; }
+
+/* Seitenabstand unter der Navigation */
+.page-main {
+    margin-top: 80px;
+}
+
+/* Navigation ist auf dem Handy höher */
+@media (max-width: 575.98px) {
+    .page-main { margin-top: 110px; }
+}

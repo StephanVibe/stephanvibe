@@ -9,252 +9,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
-        /* ---------- Hintergrund mit Lichtflecken (damit das Glas etwas zum Verwischen hat) ---------- */
-        body {
-            background: #05060a !important;
-            min-height: 100vh;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background:
-                radial-gradient(circle at 15% 20%, rgba(80, 120, 255, 0.35), transparent 40%),
-                radial-gradient(circle at 85% 30%, rgba(180, 80, 255, 0.28), transparent 45%),
-                radial-gradient(circle at 50% 90%, rgba(0, 200, 255, 0.22), transparent 45%);
-        }
-
-        /* ---------- Glas-Karte ---------- */
-        .glass-card {
-            --mx: 50%;
-            --my: 50%;
-            position: relative;
-            overflow: hidden;
-            padding: 2rem;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.06);
-            -webkit-backdrop-filter: blur(16px) saturate(140%);
-            backdrop-filter: blur(16px) saturate(140%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.45),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Lichtkegel, der der Maus folgt */
-        .glass-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background: radial-gradient(
-                350px circle at var(--mx) var(--my),
-                rgba(130, 170, 255, 0.22),
-                transparent 60%
-            );
-        }
-
-        .glass-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(140, 180, 255, 0.55);
-            box-shadow:
-                0 12px 40px rgba(0, 0, 0, 0.5),
-                0 0 28px rgba(100, 150, 255, 0.45),
-                inset 0 1px 0 rgba(255, 255, 255, 0.25);
-        }
-
-        .glass-card:hover::before {
-            opacity: 1;
-        }
-
-        /* Inhalt über dem Lichtkegel halten */
-        .glass-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ---------- Schwebende Glas-Navigation ---------- */
-        .glass-header {
-            padding-top: 14px;
-            pointer-events: none; /* nur die Pille selbst ist klickbar */
-        }
-
-        .glass-nav {
-            pointer-events: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 0.5rem 0.6rem 0.5rem 1.4rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.07);
-            -webkit-backdrop-filter: blur(18px) saturate(150%);
-            backdrop-filter: blur(18px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.45),
-                inset 0 1px 0 rgba(255, 255, 255, 0.18);
-        }
-
-        /* ---------- Schriftzug statt Logo ---------- */
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.15rem;
-            letter-spacing: 0.02em;
-            color: #fff;
-            white-space: nowrap;
-        }
-
-        .nav-brand:hover {
-            color: #fff;
-        }
-
-        .brand-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #7fa8ff;
-            box-shadow: 0 0 10px 2px rgba(110, 160, 255, 0.8);
-            animation: brandPulse 2.4s ease-in-out infinite;
-        }
-
-        .brand-text span {
-            background: linear-gradient(90deg, #8fb4ff, #c28bff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        @keyframes brandPulse {
-            0%, 100% { opacity: 1;   transform: scale(1); }
-            50%      { opacity: 0.6; transform: scale(0.8); }
-        }
-
-        .nav-buttons {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* ---------- Glas-Button ---------- */
-        .glass-button {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            border-radius: 999px;
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
-            transition: transform 0.25s ease, background 0.25s ease,
-                        border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        /* Lichtstreifen, der beim Hover über den Button läuft */
-        .glass-button::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -80%;
-            width: 50%;
-            height: 100%;
-            pointer-events: none;
-            background: linear-gradient(
-                110deg,
-                transparent,
-                rgba(255, 255, 255, 0.35),
-                transparent
-            );
-            transform: skewX(-20deg);
-        }
-
-        .glass-button:hover {
-            color: #fff;
-            transform: translateY(-2px);
-            background: rgba(140, 180, 255, 0.18);
-            border-color: rgba(140, 180, 255, 0.65);
-            box-shadow:
-                0 0 22px rgba(100, 150, 255, 0.55),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .glass-button:hover::after {
-            left: 130%;
-            transition: left 0.7s ease;
-        }
-
-        .glass-button:active {
-            transform: translateY(0);
-        }
-
-        /* Aktuelle Seite hervorheben */
-        .glass-button.active {
-            background: rgba(140, 180, 255, 0.22);
-            border-color: rgba(140, 180, 255, 0.6);
-            box-shadow:
-                0 0 16px rgba(100, 150, 255, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        /* Zurück-Button mit rotem Leuchten (wie vorher btn-hover-red) */
-        .glass-button.back:hover {
-            background: rgba(255, 90, 90, 0.18);
-            border-color: rgba(255, 110, 110, 0.7);
-            box-shadow:
-                0 0 22px rgba(255, 80, 80, 0.55),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        /* ---------- Seiteninhalt ---------- */
-        .page-title {
-            background: linear-gradient(90deg, #8fb4ff, #c28bff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 700;
-        }
-
-        .hobby-img {
-            display: block;
-            width: 100%;
-            max-width: 110px;
-            height: auto;
-            object-fit: contain;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .hobby-card:hover .hobby-img {
-            transform: scale(1.06);
-            filter: drop-shadow(0 0 14px rgba(120, 165, 255, 0.7));
-        }
-
-        /* Schach-Bild ist ein Link: zusätzlich eigener Glow */
-        a.hobby-link:hover .hobby-img {
-            transform: scale(1.12);
-            filter: drop-shadow(0 0 18px rgba(160, 200, 255, 0.95));
-        }
-
-        @media (max-width: 575.98px) {
-            .glass-nav { padding: 0.4rem 0.5rem 0.4rem 0.9rem; }
-            .nav-brand { font-size: 1rem; gap: 0.45rem; }
-            .glass-button { padding: 0.4rem 0.7rem; font-size: 0.85rem; }
-            .nav-buttons { gap: 0.3rem; }
-            .glass-card { padding: 1.5rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/glass.css">
+    <link rel="stylesheet" href="css/ueberMich.css">
 </head>
 
 <body class="text-light">
@@ -278,18 +34,13 @@
 
     <main class="container" style="margin-top: 110px;">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <a class="glass-button back" href="index.html">← Zurück</a>
-            <a class="glass-button" href="mehrthemen.html">Mehr Themen →</a>
-        </div>
-
         <h1 class="page-title mb-5 text-center">Hobbys</h1>
 
         <!-- Hobby 1: Schach -->
         <section class="glass-card hobby-card mb-4">
             <div class="row align-items-center text-center text-md-start">
                 <div class="col-12 col-md-2 mb-3 mb-md-0">
-                    <a class="hobby-link" href="https://www.chess.com/member/generalcamel98" rel="noreferrer" target="_blank">
+                    <a class="hobby-link" href="https://www.chess.com/member/stephanvibe" rel="noreferrer" target="_blank">
                         <img src="pictures/chess.png" class="hobby-img mx-auto mx-md-0" alt="Schach">
                     </a>
                 </div>
@@ -310,14 +61,17 @@
         <section class="glass-card hobby-card mb-4">
             <div class="row align-items-center text-center text-md-start">
                 <div class="col-12 col-md-2 mb-3 mb-md-0">
-                    <img src="pictures/books.png" class="hobby-img mx-auto mx-md-0" alt="Bücher">
+                    <a href="inarbeit.html">
+                        <img src="pictures/books.png" class="hobby-img mx-auto mx-md-0" alt="Bücher">
+                    </a>
                 </div>
 
                 <div class="col-12 col-md-10">
                     <p class="lead mb-0">
                         Ich lese gerne Bücher, Romane, Science-Fiction, Fantasy, Thriller von allem etwas. Es ist
                         eine großartige Möglichkeit, in andere Welten einzutauchen und die Fantasie zu beflügeln und
-                        den Abend ausklingen zu lassen.
+                        den Abend ausklingen zu lassen. Klicke auf das Bild, um zu sehen, welche Bücher ich schon gelesen habe 
+                        und welche mir besonders gefallen haben.
                     </p>
                 </div>
             </div>
@@ -327,7 +81,9 @@
         <section class="glass-card hobby-card mb-5">
             <div class="row align-items-center text-center text-md-start">
                 <div class="col-12 col-md-2 mb-3 mb-md-0">
-                    <img src="pictures/programmierenklein.png" class="hobby-img mx-auto mx-md-0" alt="Programmieren">
+                    <a href="projekte.html" rel="noreferrer">
+                        <img src="pictures/programmierenklein.png" class="hobby-img mx-auto mx-md-0" alt="Programmieren">
+                    </a>
                 </div>
 
                 <div class="col-12 col-md-10">
@@ -335,7 +91,7 @@
                         Ich entwickle gerne eigene Webseiten, Spiele und Apps. Es ist eine kreative und lohnende
                         Tätigkeit, die es mir ermöglicht, meine Ideen zum Leben zu erwecken und neue Fähigkeiten zu
                         erlernen. Es ist auch eine großartige Möglichkeit, Probleme zu lösen und innovative Lösungen
-                        zu entwickeln.
+                        zu entwickeln. Klick das Bild an um dir meine Projekte anzuschauen.                    
                     </p>
                 </div>
             </div>
