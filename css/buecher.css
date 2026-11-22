@@ -74,18 +74,8 @@
     align-items: center;
     gap: 1rem;
     margin: 0;
-    padding: 1.1rem 1.25rem 1.1rem 1.5rem;
+    padding: 1.1rem 1.25rem;
     overflow: hidden;
-}
- 
-/* Buchrücken links */
-.book-card::after {
-    content: "";
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 5px;
-    background: var(--accent);
-    opacity: .9;
 }
  
 .book-vol {

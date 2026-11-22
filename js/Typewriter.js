@@ -4,8 +4,8 @@
  * @param {HTMLElement|string} target - Das HTML-Element oder dessen ID.
  * @param {string|string[]} textInput - Ein einzelner String oder ein Array aus Strings.
  * @param {Object} [options] - Optionale Konfigurationen.
- * @param {number} [options.speed=15] - Tipp-Geschwindigkeit in ms pro Zeichen.
- * @param {number} [options.pause=0] - Pause in ms zwischen mehreren Texten.
+ * @param {number} [options.speed=10] - Tipp-Geschwindigkeit in ms pro Zeichen.
+ * @param {number} [options.pause=40] - Pause in ms zwischen mehreren Texten.
  * @param {boolean} [options.loop=false] - Ob die Animation endlos wiederholt werden soll.
  * @param {Function} [options.onComplete=null] - Callback-Funktion, wenn das Tippen beendet ist.
  */
