@@ -1,0 +1,144 @@
+/* Bücher-Seite – ergänzt glass.css (Glas-Karten bleiben unverändert) */
+ 
+:root {
+    --book-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+}
+ 
+.books-intro {
+    max-width: 38rem;
+    margin: 0 auto 3.5rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .72);
+    line-height: 1.6;
+}
+ 
+.books-intro strong {
+    color: #fff;
+    font-family: var(--book-serif);
+    font-weight: 600;
+}
+ 
+/* ---------- Gruppen ---------- */
+.book-group {
+    --accent: #8b7bff;
+    margin-bottom: 3rem;
+}
+ 
+.book-group-title {
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    margin: 0 0 1.1rem;
+    padding-bottom: .6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+    font-family: var(--book-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 100, 'opsz' 48;
+    line-height: 1.2;
+}
+ 
+.book-group-title small {
+    margin-left: auto;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: .85rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, .55);
+}
+ 
+.book-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+ 
+@media (min-width: 768px) {
+    .book-grid { grid-template-columns: repeat(2, 1fr); }
+}
+ 
+/* Serien-Farben: jede Reihe bekommt eine eigene Buchrücken-Farbe */
+.g-potter    { --accent: #f0b429; }
+.g-follett   { --accent: #e8735a; }
+.g-erebos    { --accent: #c04dff; }
+.g-quality   { --accent: #2ee6c5; }
+.g-powerless { --accent: #ff5d8f; }
+.g-weir      { --accent: #5aa9ff; }
+.g-fitzek    { --accent: #ff4d4d; }
+.g-roman     { --accent: #a3e635; }
+.g-sach      { --accent: #cbd5e1; }
+ 
+/* ---------- Karten ---------- */
+.book-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 1.1rem 1.25rem 1.1rem 1.5rem;
+    overflow: hidden;
+}
+ 
+/* Buchrücken links */
+.book-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    background: var(--accent);
+    opacity: .9;
+}
+ 
+.book-vol {
+    flex: 0 0 auto;
+    min-width: 1.6rem;
+    font-family: var(--book-serif);
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: var(--accent);
+    text-align: center;
+}
+ 
+.book-info {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+ 
+.book-title {
+    margin: 0;
+    font-family: var(--book-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-variation-settings: 'SOFT' 100, 'opsz' 24;
+    line-height: 1.3;
+    letter-spacing: .005em;
+    text-wrap: balance;
+}
+ 
+.book-status {
+    display: inline-block;
+    margin-top: .45rem;
+    padding: .15rem .6rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: .78rem;
+    color: var(--accent);
+}
+ 
+/* Platzhalter für spätere Cover (einfach <img class="book-cover"> vor .book-info) */
+.book-cover {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .45);
+}
+ 
+@media (max-width: 575px) {
+    .book-group-title { font-size: 1.35rem; }
+    .book-title { font-size: 1.08rem; }
+}
+ 
